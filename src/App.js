@@ -18,7 +18,6 @@ function App() {
 
     return (
         <div className="App">
-            Comments Block
             {comments.map((comment, index) =>
                 <CommentBlock key={index} comment={comment} />
             )}
