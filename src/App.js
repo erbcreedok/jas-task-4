@@ -1,26 +1,17 @@
 import './App.css';
-import { CommentBlock } from './components/CommentBlock'
 import {useEffect, useState} from "react";
+import {fetchTopTracks} from "./fetchers/fetchTopTracks";
 
 function App() {
-    const [comments, setComments] = useState([])
-
+    const [tracks, setTracks] = useState([])
 
     useEffect(() => {
-        fetch('https://kdwed-f1dd2-default-rtdb.europe-west1.firebasedatabase.app/comments.json')
-            .then((response) => {
-                return response.json()
-            }).then((data) => {
-            setComments(data);
-            return data
-        })
+        fetchTopTracks().then((data) => setTracks(data.tracks))
     }, [])
 
     return (
         <div className="App">
-            {comments.map((comment, index) =>
-                <CommentBlock key={index} comment={comment} />
-            )}
+            {JSON.stringify(tracks)}
         </div>
     );
 }

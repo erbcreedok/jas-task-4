@@ -9,6 +9,5 @@ const options = {
 export function fetchTopTracks() {
     return fetch('https://shazam.p.rapidapi.com/songs/list-artist-top-tracks?id=40008598&locale=en-US', options)
         .then(response => response.json())
-        .then(response => console.log(response))
         .catch(err => console.error(err));
 }
