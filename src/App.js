@@ -1,24 +1,26 @@
 import './App.css';
 import { CommentBlock } from './components/CommentBlock'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function App() {
     const [comments, setComments] = useState([])
 
 
-    fetch('https://kdwed-f1dd2-default-rtdb.europe-west1.firebasedatabase.app/comments.json')
-        .then((response) => {
-            return response.json()
-        }).then((data) => {
+    useEffect(() => {
+        fetch('https://kdwed-f1dd2-default-rtdb.europe-west1.firebasedatabase.app/comments.json')
+            .then((response) => {
+                return response.json()
+            }).then((data) => {
             setComments(data);
             return data
         })
+    }, [])
 
     return (
         <div className="App">
             Comments Block
-            {comments.map((comment) =>
-                <CommentBlock comment={comment} />
+            {comments.map((comment, index) =>
+                <CommentBlock key={index} comment={comment} />
             )}
         </div>
     );
